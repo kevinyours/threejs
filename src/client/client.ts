@@ -1,8 +1,10 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import Stats from "three/examples/jsm/libs/stats.module";
+import { GUI } from "dat.gui";
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff);
+// scene.background = new THREE.Color(0xffffff);
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -34,6 +36,19 @@ function onWindowResize() {
   render();
 }
 
+const stats = Stats();
+document.body.appendChild(stats.dom);
+
+const gui = new GUI();
+const cubeFolder = gui.addFolder("Cube");
+cubeFolder.add(cube.rotation, "x", 0, Math.PI * 2);
+cubeFolder.add(cube.rotation, "y", 0, Math.PI * 2);
+cubeFolder.add(cube.rotation, "z", 0, Math.PI * 2);
+cubeFolder.open();
+const cameraFolder = gui.addFolder("Camera");
+cameraFolder.add(camera.position, "z", 0, 10);
+cameraFolder.open();
+
 function animate() {
   requestAnimationFrame(animate);
 
@@ -41,6 +56,8 @@ function animate() {
   cube.rotation.y += 0.01;
 
   render();
+
+  stats.update();
 }
 
 function render() {
