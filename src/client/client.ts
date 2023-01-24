@@ -4,6 +4,7 @@ import Stats from "three/examples/jsm/libs/stats.module";
 import { GUI } from "dat.gui";
 
 const scene = new THREE.Scene();
+scene.add(new THREE.AxesHelper(5));
 // scene.background = new THREE.Color(0xffffff);
 const camera = new THREE.PerspectiveCamera(
   75,
